@@ -5,7 +5,7 @@ A minimal neovim plugin to track time spent on a line.
 ## Features
 
 - Start/stop a timer on any line.
-- Time is stored in a comment on the line itself in seconds for precision (e.g., `<!-- 300 sec -->`).
+- Time is stored in a comment on the line itself in minutes (e.g., `<!-- ⏱ 5 min -->`).
 - The time is automatically accumulated.
 
 ## Installation

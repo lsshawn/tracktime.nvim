@@ -40,7 +40,7 @@ function M.toggle()
 		local total_sec = elapsed_sec
 
 		-- Step 1: Find all comments and add their value to total_sec
-		local find_pattern = "<!%-%-%s*(-?%d+)%s*(%a+)%s*%-%->"
+		local find_pattern = "<!%-%-%s*⏱%s*(-?%d+)%s*(%a+)%s*%-%->"
 		for num_str, unit_str in line:gmatch(find_pattern) do
 			local val = tonumber(num_str) or 0
 			if unit_str == "min" then
@@ -51,7 +51,7 @@ function M.toggle()
 		end
 
 		-- Step 2: Remove all comments from the line
-		local remove_pattern = "%s*<!%-%-%s*-?%d+%s*%a+%s*%-%->"
+		local remove_pattern = "%s*<!%-%-%s*⏱%s*-?%d+%s*%a+%s*%-%->"
 		local cleaned_line = line:gsub(remove_pattern, "")
 		cleaned_line = cleaned_line:gsub("%s*$", "")
 
@@ -59,11 +59,13 @@ function M.toggle()
 			total_sec = 0
 		end
 
-		-- Always write in seconds for precision
-		local updated = cleaned_line .. string.format(" <!-- %d sec -->", total_sec)
+		local total_min_for_storage = math.floor(total_sec / 60)
+
+		-- Always write in minutes
+		local updated = cleaned_line .. string.format(" <!-- ⏱ %d min -->", total_min_for_storage)
 		vim.api.nvim_set_current_line(updated)
 
-		local total_min_display = math.floor(total_sec / 60)
+		local total_min_display = total_min_for_storage
 		local elapsed_sec_display = elapsed_sec
 		print(string.format("⏸️ Paused: +%ds (total: %d min)", elapsed_sec_display, total_min_display))
 		session.start_time = nil
