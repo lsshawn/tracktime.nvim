@@ -1,4 +1,4 @@
-# timetrack.nvim
+# tracktime.nvim
 
 A minimal neovim plugin to track time spent on a line.
 
@@ -14,9 +14,9 @@ A minimal neovim plugin to track time spent on a line.
 
 ```lua
 {
-  "lsshawn/timetrack.nvim",
+  "lsshawn/tracktime.nvim",
   config = function()
-    require("timetrack").setup({
+    require("tracktime").setup({
       -- your configuration comes here
       -- or leave it empty to use the default settings
     })
@@ -40,7 +40,7 @@ You can customize the plugin by passing options to the `setup` function.
 Example configuration:
 
 ```lua
-require("timetrack").setup({
+require("tracktime").setup({
   -- Change the default keymap
   keymap = "<leader>T",
 })
@@ -49,12 +49,12 @@ require("timetrack").setup({
 To disable the default keymap, set it to `false`:
 
 ```lua
-require("timetrack").setup({
+require("tracktime").setup({
   keymap = false,
 })
 ```
 
 You can then set your own keymap:
 ```lua
-vim.keymap.set("n", "<leader>ts", require("timetrack").toggle, { desc = "Toggle time tracker" })
+vim.keymap.set("n", "<leader>ts", require("tracktime").toggle, { desc = "Toggle time tracker" })
 ```
